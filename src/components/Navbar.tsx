@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import { Menu, X } from 'lucide-react';
 
@@ -16,6 +17,17 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navItems = [
+    { name: 'Accueil', path: '/' },
+    { name: 'Notre Groupe', path: '/notre-groupe' },
+    { name: 'Départements', path: '/departements' },
+    { name: 'Références', path: '/references' },
+    { name: 'Carrières', path: '/carrieres' },
+    { name: 'RSE', path: '/rse' },
+    { name: 'Actualités', path: '/actualites' },
+    { name: 'Contact', path: '/contact' }
+  ];
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
@@ -25,20 +37,22 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Logo size="md" className={isScrolled ? "text-foreground" : ""} />
+        <Link to="/">
+          <Logo size="md" className={isScrolled ? "text-foreground" : ""} />
+        </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {['Accueil', 'Services', 'Projets', 'À propos', 'Contact'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+        <nav className="hidden md:flex items-center space-x-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
               className={`text-sm font-medium link-underline transition-colors duration-200 ${
                 isScrolled ? 'text-foreground hover:text-geoplan-red' : 'text-white hover:text-geoplan-red'
               }`}
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
         </nav>
 
@@ -59,16 +73,16 @@ const Navbar: React.FC = () => {
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg shadow-lg animate-reveal origin-top">
             <nav className="container mx-auto py-6 px-4 flex flex-col space-y-4">
-              {['Accueil', 'Services', 'Projets', 'À propos', 'Contact'].map((item, i) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+              {navItems.map((item, i) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
                   className={`text-foreground text-lg font-medium hover:text-geoplan-red transition-colors duration-200`}
                   style={{ animationDelay: `${i * 50}ms` }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </Link>
               ))}
             </nav>
           </div>
