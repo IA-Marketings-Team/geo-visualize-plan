@@ -40,7 +40,9 @@ const ContactSection: React.FC = () => {
     setIsSubmitting(true);
     
     try {
+      console.log("Envoi du formulaire en cours...", formData);
       const result = await submitContactForm(formData);
+      console.log("Résultat de l'envoi:", result);
       
       if (result.success) {
         setSubmitted(true);
@@ -58,7 +60,7 @@ const ContactSection: React.FC = () => {
         console.error("Erreur détaillée:", result.error);
         toast({
           title: "Erreur",
-          description: "Une erreur est survenue lors de l'envoi du formulaire.",
+          description: `Erreur lors de l'envoi du formulaire: ${result.error?.message || "Erreur inconnue"}`,
           variant: "destructive",
         });
       }
