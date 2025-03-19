@@ -27,7 +27,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.6) contrast(1.2)",
+          filter: "brightness(1.2) contrast(1.5)",
           mixBlendMode: "multiply"
         }}
       />

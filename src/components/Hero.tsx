@@ -17,10 +17,10 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 z-0" 
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop')",
+          backgroundImage: "url('/plan.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.6) contrast(1.2)",
+          filter: "brightness(1.2) contrast(1.2)",
           mixBlendMode: "multiply"
         }}
       />

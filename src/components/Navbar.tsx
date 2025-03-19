@@ -1,12 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +27,8 @@ const Navbar: React.FC = () => {
     { name: 'Actualités', path: '/actualites' },
     { name: 'Contact', path: '/contact' }
   ];
+
+  console.log('Current path:', location.pathname); // Debugging line
 
   return (
     <header
@@ -49,7 +51,7 @@ const Navbar: React.FC = () => {
               to={item.path}
               className={`text-sm font-medium text-white link-underline transition-colors duration-200 ${
                 isScrolled ? 'text-foreground hover:text-geoplan-red' : 'text-white hover:text-geoplan-red'
-              }`}
+              } ${location.pathname === item.path ? 'text-red-500 !important' : 'text-gray'}`}
             >
               {item.name}
             </Link>
@@ -77,7 +79,9 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-foreground text-lg font-medium hover:text-geoplan-red transition-colors duration-200`}
+                  className={`text-foreground text-lg font-medium hover:text-geoplan-red transition-colors duration-200 ${
+                    location.pathname === item.path ? 'text-geoplan-red !important' : ''
+                  }`}
                   style={{ animationDelay: `${i * 50}ms` }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
