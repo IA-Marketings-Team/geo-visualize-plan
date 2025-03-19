@@ -14,7 +14,7 @@ const References: React.FC = () => {
       category: "Plan de façade"
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1600607687644-c7e89a31d47c?q=80&w=2070&auto=format&fit=crop",
+      imageSrc: "/sitting_room.jpg",
       title: "Loft Urban Design",
       category: "Plan d'intérieur"
     },
@@ -24,7 +24,7 @@ const References: React.FC = () => {
       category: "Plan topographique"
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1628744448839-a475cc0e90c2?q=80&w=2070&auto=format&fit=crop",
+      imageSrc: "/caim.jpg",
       title: "Complexe Harmonie",
       category: "Rendu réaliste"
     },

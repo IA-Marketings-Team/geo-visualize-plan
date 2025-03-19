@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
           backgroundImage: "url('https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.4) contrast(1.2)",
+          filter: "brightness(0.6) contrast(1.2)",
           mixBlendMode: "multiply"
         }}
       />
@@ -52,16 +52,6 @@ const Hero: React.FC = () => {
             Découvrir nos services
           </a>
         </AnimatedSection>
-
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float">
-          <a 
-            href="#services" 
-            className="flex flex-col items-center text-white/80 hover:text-white transition-colors"
-          >
-            <span className="text-sm mb-2">Découvrir</span>
-            <ChevronDown className="h-6 w-6" />
-          </a>
-        </div>
       </div>
     </section>
   );

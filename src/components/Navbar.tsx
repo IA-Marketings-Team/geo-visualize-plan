@@ -30,9 +30,9 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 bg-black-600 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
         isScrolled
-          ? 'py-3 bg-background/80 backdrop-blur-md shadow-md'
+          ? 'py-3 bg-black/80 backdrop-blur-sm shadow-md'
           : 'py-6 bg-transparent'
       }`}
     >
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`text-sm font-medium link-underline transition-colors duration-200 ${
+              className={`text-sm font-medium text-white link-underline transition-colors duration-200 ${
                 isScrolled ? 'text-foreground hover:text-geoplan-red' : 'text-white hover:text-geoplan-red'
               }`}
             >
