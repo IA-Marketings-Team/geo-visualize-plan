@@ -55,6 +55,7 @@ const ContactSection: React.FC = () => {
           description: "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.",
         });
       } else {
+        console.error("Erreur détaillée:", result.error);
         toast({
           title: "Erreur",
           description: "Une erreur est survenue lors de l'envoi du formulaire.",

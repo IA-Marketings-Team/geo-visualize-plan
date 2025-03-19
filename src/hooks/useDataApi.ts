@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
@@ -288,16 +289,21 @@ export const useCompanyInfo = () => {
 };
 
 export const submitContactForm = async (contact: Contact) => {
-  const { data, error } = await supabase
-    .from('contacts')
-    .insert([contact])
-    .select()
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert([contact])
+      .select()
+      .single();
 
-  if (error) {
-    console.error('Error submitting contact form:', error);
+    if (error) {
+      console.error('Error submitting contact form:', error);
+      return { success: false, error };
+    }
+    
+    return { success: true, data };
+  } catch (error) {
+    console.error('Exception submitting contact form:', error);
     return { success: false, error };
   }
-  
-  return { success: true, data };
 };
