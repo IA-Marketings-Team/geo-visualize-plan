@@ -4,63 +4,29 @@ import PageLayout from '../components/PageLayout';
 import PageHeader from '../components/PageHeader';
 import AnimatedSection from '../components/AnimatedSection';
 import ProjectCard from '../components/ProjectCard';
+import { useProjects, useClients } from '@/hooks/useDataApi';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const References: React.FC = () => {
-  // Sample project data
-  const projects = [
-    {
-      imageSrc: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop",
-      title: "Résidence Les Terrasses",
-      category: "Plan de façade"
-    },
-    {
-      imageSrc: "/sitting_room.jpg",
-      title: "Loft Urban Design",
-      category: "Plan d'intérieur"
-    },
-    {
-      imageSrc: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2070&auto=format&fit=crop",
-      title: "Parc Central",
-      category: "Plan topographique"
-    },
-    {
-      imageSrc: "/caim.jpg",
-      title: "Complexe Harmonie",
-      category: "Rendu réaliste"
-    },
-    {
-      imageSrc: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=2074&auto=format&fit=crop",
-      title: "Maison de la Colline",
-      category: "Plan de toiture"
-    },
-    {
-      imageSrc: "https://images.unsplash.com/photo-1536895058696-a69b1c7ba34f?q=80&w=2070&auto=format&fit=crop",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop",
-      title: "Métropole Réseaux",
-      category: "Plan de réseaux enterrés"
-    },
-    {
-      imageSrc: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-      title: "Smart City",
-      category: "Modélisation urbaine"
-    }
-  ];
+  const { projects, loading: projectsLoading } = useProjects();
+  const { clients, loading: clientsLoading } = useClients();
 
-  // Client logos
-  const clients = [
-    "Métropole de Lyon",
-    "SNCF Réseau",
-    "Bouygues Construction",
-    "Eiffage",
-    "Vinci Immobilier",
-    "Aéroport de Paris",
-    "EDF",
-    "Engie"
-  ];
+  // Affichage des squelettes pendant le chargement
+  const renderProjectSkeletons = () => {
+    return Array(8).fill(null).map((_, index) => (
+      <div key={index} className="space-y-3">
+        <Skeleton className="h-60 w-full rounded-lg" />
+        <Skeleton className="h-4 w-1/4 rounded-lg" />
+        <Skeleton className="h-6 w-3/4 rounded-lg" />
+      </div>
+    ));
+  };
+
+  const renderClientSkeletons = () => {
+    return Array(8).fill(null).map((_, index) => (
+      <Skeleton key={index} className="h-32 w-full rounded-xl" />
+    ));
+  };
 
   return (
     <PageLayout>
@@ -83,15 +49,19 @@ const References: React.FC = () => {
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                imageSrc={project.imageSrc}
-                title={project.title}
-                category={project.category}
-                delay={100 + index * 50}
-              />
-            ))}
+            {projectsLoading ? (
+              renderProjectSkeletons()
+            ) : (
+              projects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  imageSrc={project.image_src}
+                  title={project.title}
+                  category={project.category}
+                  delay={100 + index * 50}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -109,13 +79,17 @@ const References: React.FC = () => {
           </AnimatedSection>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {clients.map((client, index) => (
-              <AnimatedSection key={index} delay={100 + index * 50}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 h-32 flex items-center justify-center hover:bg-white/10 transition-all duration-300 hover-lift">
-                  <span className="text-xl font-semibold text-center text-white">{client}</span>
-                </div>
-              </AnimatedSection>
-            ))}
+            {clientsLoading ? (
+              renderClientSkeletons()
+            ) : (
+              clients.map((client, index) => (
+                <AnimatedSection key={client.id} delay={100 + index * 50}>
+                  <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 h-32 flex items-center justify-center hover:bg-white/10 transition-all duration-300 hover-lift">
+                    <span className="text-xl font-semibold text-center text-white">{client.name}</span>
+                  </div>
+                </AnimatedSection>
+              ))
+            )}
           </div>
         </div>
       </section>

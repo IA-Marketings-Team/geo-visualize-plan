@@ -5,34 +5,34 @@ import PageHeader from '../components/PageHeader';
 import AnimatedSection from '../components/AnimatedSection';
 import { Briefcase, Heart, GraduationCap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useJobOffers } from '@/hooks/useDataApi';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Carrieres: React.FC = () => {
-  const jobOffers = [
-    {
-      title: "Cartographe SIG",
-      location: "Paris, France",
-      type: "CDI",
-      description: "Nous recherchons un(e) cartographe SIG pour rejoindre notre équipe parisienne et travailler sur des projets de cartographie urbaine."
-    },
-    {
-      title: "Modélisateur 3D",
-      location: "Lyon, France",
-      type: "CDI",
-      description: "Créez des maquettes 3D détaillées pour nos clients dans le secteur de l'architecture et de l'urbanisme."
-    },
-    {
-      title: "Ingénieur Topographe",
-      location: "Bordeaux, France",
-      type: "CDI",
-      description: "Participez aux relevés topographiques et à l'analyse des données pour nos projets d'infrastructures."
-    },
-    {
-      title: "Développeur Web SIG",
-      location: "Toulouse, France",
-      type: "CDI",
-      description: "Développez des applications web cartographiques interactives pour nos clients."
-    }
-  ];
+  const { jobOffers, loading } = useJobOffers();
+
+  // Affichage des squelettes pendant le chargement
+  const renderJobSkeletons = () => {
+    return Array(4).fill(null).map((_, index) => (
+      <AnimatedSection key={index} delay={100 + index * 50}>
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader>
+            <div className="flex justify-between items-start">
+              <div>
+                <Skeleton className="h-6 w-40 mb-2" />
+                <Skeleton className="h-4 w-32" />
+              </div>
+              <Skeleton className="h-6 w-16 rounded-full" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Skeleton className="h-16 w-full mb-3" />
+            <Skeleton className="h-5 w-32" />
+          </CardContent>
+        </Card>
+      </AnimatedSection>
+    ));
+  };
 
   return (
     <PageLayout>
@@ -116,29 +116,33 @@ const Carrieres: React.FC = () => {
           <AnimatedSection className="mb-10">
             <h3 className="text-2xl font-display font-bold text-foreground mb-6">Nos offres d'emploi</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {jobOffers.map((job, index) => (
-                <AnimatedSection key={index} delay={100 + index * 50}>
-                  <Card className="hover:shadow-md transition-shadow">
-                    <CardHeader>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-xl">{job.title}</CardTitle>
-                          <p className="text-sm text-muted-foreground mt-1">{job.location} | {job.type}</p>
+              {loading ? (
+                renderJobSkeletons()
+              ) : (
+                jobOffers.map((job, index) => (
+                  <AnimatedSection key={job.id} delay={100 + index * 50}>
+                    <Card className="hover:shadow-md transition-shadow">
+                      <CardHeader>
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <CardTitle className="text-xl">{job.title}</CardTitle>
+                            <p className="text-sm text-muted-foreground mt-1">{job.location} | {job.type}</p>
+                          </div>
+                          <span className="bg-geoplan-red/10 text-geoplan-red text-xs px-2 py-1 rounded-full">
+                            Nouveau
+                          </span>
                         </div>
-                        <span className="bg-geoplan-red/10 text-geoplan-red text-xs px-2 py-1 rounded-full">
-                          Nouveau
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground mb-4">{job.description}</p>
-                      <button className="text-geoplan-red font-medium hover:underline">
-                        Voir l'offre complète →
-                      </button>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground mb-4">{job.description}</p>
+                        <button className="text-geoplan-red font-medium hover:underline">
+                          Voir l'offre complète →
+                        </button>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                ))
+              )}
             </div>
           </AnimatedSection>
           

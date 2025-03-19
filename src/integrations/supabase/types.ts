@@ -9,7 +9,293 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      clients: {
+        Row: {
+          created_at: string | null
+          id: string
+          logo_url: string | null
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
+      company_info: {
+        Row: {
+          address: string
+          country: string
+          created_at: string | null
+          email: string
+          id: string
+          linkedin_url: string | null
+          phone: string
+          youtube_url: string | null
+        }
+        Insert: {
+          address: string
+          country: string
+          created_at?: string | null
+          email: string
+          id?: string
+          linkedin_url?: string | null
+          phone: string
+          youtube_url?: string | null
+        }
+        Update: {
+          address?: string
+          country?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          linkedin_url?: string | null
+          phone?: string
+          youtube_url?: string | null
+        }
+        Relationships: []
+      }
+      contacts: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          is_processed: boolean | null
+          message: string
+          name: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          is_processed?: boolean | null
+          message: string
+          name: string
+          subject: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          is_processed?: boolean | null
+          message?: string
+          name?: string
+          subject?: string
+        }
+        Relationships: []
+      }
+      department_services: {
+        Row: {
+          created_at: string | null
+          department_id: string | null
+          id: string
+          service_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          department_id?: string | null
+          id?: string
+          service_name: string
+        }
+        Update: {
+          created_at?: string | null
+          department_id?: string | null
+          id?: string
+          service_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "department_services_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      departments: {
+        Row: {
+          created_at: string | null
+          description: string
+          icon: string
+          id: string
+          image_src: string
+          name: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          icon: string
+          id?: string
+          image_src: string
+          name: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          image_src?: string
+          name?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      job_offers: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          is_active: boolean | null
+          location: string
+          title: string
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          is_active?: boolean | null
+          location: string
+          title: string
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          is_active?: boolean | null
+          location?: string
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          author: string
+          category: string
+          content: string | null
+          created_at: string | null
+          date: string
+          excerpt: string
+          id: string
+          image: string
+          title: string
+        }
+        Insert: {
+          author: string
+          category: string
+          content?: string | null
+          created_at?: string | null
+          date: string
+          excerpt: string
+          id?: string
+          image: string
+          title: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          content?: string | null
+          created_at?: string | null
+          date?: string
+          excerpt?: string
+          id?: string
+          image?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          category: string
+          client: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          image_src: string
+          title: string
+        }
+        Insert: {
+          category: string
+          client?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_src: string
+          title: string
+        }
+        Update: {
+          category?: string
+          client?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_src?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      rse_commitments: {
+        Row: {
+          content: string
+          created_at: string | null
+          icon: string
+          id: string
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          icon: string
+          id?: string
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          icon?: string
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string | null
+          description: string
+          icon: string
+          id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          icon: string
+          id?: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

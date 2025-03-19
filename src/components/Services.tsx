@@ -3,40 +3,39 @@ import React from 'react';
 import ServiceCard from './ServiceCard';
 import AnimatedSection from './AnimatedSection';
 import { Building, MapPin, Home, PenTool, Mountain, Lightbulb } from 'lucide-react';
+import { useServices } from '@/hooks/useDataApi';
+import { Skeleton } from '@/components/ui/skeleton';
+import { LucideIcon } from 'lucide-react';
+
+// Fonction pour mapper les noms d'icônes aux composants Lucide
+const getIconComponent = (iconName: string): LucideIcon => {
+  const icons: Record<string, LucideIcon> = {
+    'Building': Building,
+    'MapPin': MapPin,
+    'Home': Home,
+    'PenTool': PenTool,
+    'Mountain': Mountain,
+    'Lightbulb': Lightbulb
+  };
+  
+  return icons[iconName] || Building;
+};
 
 const Services: React.FC = () => {
-  const services = [
-    {
-      icon: Building,
-      title: "Plans de façade",
-      description: "Élévations détaillées et plans précis pour visualiser l'aspect extérieur de vos bâtiments, incluant les matériaux, fenêtres et détails architecturaux."
-    },
-    {
-      icon: Home,
-      title: "Plans d'intérieur",
-      description: "Aménagements intérieurs optimisés avec une attention particulière aux flux de circulation, à l'ergonomie et à l'harmonie des espaces."
-    },
-    {
-      icon: MapPin,
-      title: "Plans de toiture",
-      description: "Représentations exactes des toitures avec spécifications techniques, pentes, évacuations d'eau et zones techniques pour une planification sans faille."
-    },
-    {
-      icon: PenTool,
-      title: "Coupes et sections",
-      description: "Visualisations en coupe révélant la structure interne, les niveaux et les détails constructifs essentiels à la compréhension globale du projet."
-    },
-    {
-      icon: Mountain,
-      title: "Plans topographiques",
-      description: "Cartographie précise du terrain avec courbes de niveau, points cotés et caractéristiques naturelles pour une intégration optimale du projet dans son environnement."
-    },
-    {
-      icon: Lightbulb,
-      title: "Rendus réalistes",
-      description: "Images photoréalistes de haute définition permettant une immersion complète dans votre projet avant sa réalisation, avec textures, éclairages et ambiances."
-    }
-  ];
+  const { services, loading } = useServices();
+
+  // Affichage des squelettes pendant le chargement
+  const renderServiceSkeletons = () => {
+    return Array(6).fill(null).map((_, index) => (
+      <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full">
+        <div className="flex flex-col h-full space-y-4">
+          <Skeleton className="h-12 w-12 rounded-full" />
+          <Skeleton className="h-6 w-3/4 bg-white/20" />
+          <Skeleton className="h-20 w-full bg-white/20" />
+        </div>
+      </div>
+    ));
+  };
 
   return (
     <section id="services" className="py-20 relative overflow-hidden bg-gradient-to-b from-geoplan-darkblue to-black">
@@ -54,15 +53,19 @@ const Services: React.FC = () => {
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              delay={100 + index * 100}
-            />
-          ))}
+          {loading ? (
+            renderServiceSkeletons()
+          ) : (
+            services.map((service, index) => (
+              <ServiceCard
+                key={service.id}
+                icon={getIconComponent(service.icon)}
+                title={service.title}
+                description={service.description}
+                delay={100 + index * 100}
+              />
+            ))
+          )}
         </div>
       </div>
     </section>
