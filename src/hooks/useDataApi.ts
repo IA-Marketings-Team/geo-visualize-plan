@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
-import { Project, Department, Service, News, JobOffer, Client, RseCommitment, CompanyInfo } from '@/types/supabase';
+import { Project, Department, Service, News, JobOffer, Client, RseCommitment, CompanyInfo, Contact } from '@/types/supabase';
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -52,7 +51,6 @@ export const useDepartments = () => {
 
         if (deptError) throw deptError;
 
-        // Pour chaque département, récupérer ses services
         const departmentsWithServices = await Promise.all(
           (deptData || []).map(async (dept) => {
             const { data: servicesData, error: servicesError } = await supabase
@@ -290,30 +288,16 @@ export const useCompanyInfo = () => {
 };
 
 export const submitContactForm = async (contact: Contact) => {
-  const { toast } = useToast();
-  
-  try {
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert([contact])
-      .select()
-      .single();
+  const { data, error } = await supabase
+    .from('contacts')
+    .insert([contact])
+    .select()
+    .single();
 
-    if (error) throw error;
-    
-    toast({
-      title: "Message envoyé",
-      description: "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.",
-    });
-    
-    return { success: true, data };
-  } catch (error) {
+  if (error) {
     console.error('Error submitting contact form:', error);
-    toast({
-      title: "Erreur",
-      description: "Une erreur est survenue lors de l'envoi du formulaire.",
-      variant: "destructive",
-    });
     return { success: false, error };
   }
+  
+  return { success: true, data };
 };

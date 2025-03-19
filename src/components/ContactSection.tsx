@@ -6,9 +6,11 @@ import { useCompanyInfo } from '@/hooks/useDataApi';
 import { submitContactForm } from '@/hooks/useDataApi';
 import { Contact } from '@/types/supabase';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
 
 const ContactSection: React.FC = () => {
   const { companyInfo, loading } = useCompanyInfo();
+  const { toast } = useToast();
   const [formData, setFormData] = useState<Contact>({
     name: '',
     email: '',
@@ -27,6 +29,11 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      toast({
+        title: "Erreur",
+        description: "Veuillez remplir tous les champs du formulaire.",
+        variant: "destructive",
+      });
       return;
     }
     
@@ -43,7 +50,24 @@ const ContactSection: React.FC = () => {
           subject: '',
           message: ''
         });
+        toast({
+          title: "Message envoyé",
+          description: "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.",
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de l'envoi du formulaire.",
+          variant: "destructive",
+        });
       }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du formulaire:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur inattendue est survenue.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
