@@ -290,8 +290,8 @@ export const useCompanyInfo = () => {
 
 export const submitContactForm = async (contact: Contact) => {
   try {
-    // Suppression de .single() qui peut causer des problèmes si aucune donnée n'est retournée
-    // Et utilisation de .maybeSingle() pour gérer correctement le cas où aucune donnée n'est retournée
+    console.log('Submitting contact form with data:', contact);
+    
     const { data, error } = await supabase
       .from('contacts')
       .insert([contact])
@@ -302,6 +302,7 @@ export const submitContactForm = async (contact: Contact) => {
       return { success: false, error };
     }
     
+    console.log('Contact form submission successful:', data);
     return { success: true, data: data?.[0] || null };
   } catch (error) {
     console.error('Exception submitting contact form:', error);

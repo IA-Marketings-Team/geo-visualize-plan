@@ -7,6 +7,7 @@ import { submitContactForm } from '@/hooks/useDataApi';
 import { Contact } from '@/types/supabase';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const ContactSection: React.FC = () => {
   const { companyInfo, loading } = useCompanyInfo();
@@ -19,6 +20,7 @@ const ContactSection: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -27,8 +29,10 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError(null);
     
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setFormError("Veuillez remplir tous les champs du formulaire.");
       toast({
         title: "Erreur",
         description: "Veuillez remplir tous les champs du formulaire.",
@@ -57,18 +61,22 @@ const ContactSection: React.FC = () => {
           description: "Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.",
         });
       } else {
+        const errorMessage = result.error?.message || "Une erreur s'est produite";
         console.error("Erreur détaillée:", result.error);
+        setFormError(errorMessage);
         toast({
           title: "Erreur",
-          description: `Erreur lors de l'envoi du formulaire: ${result.error?.message || "Erreur inconnue"}`,
+          description: `Erreur lors de l'envoi du formulaire: ${errorMessage}`,
           variant: "destructive",
         });
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Une erreur inattendue est survenue";
       console.error("Erreur lors de l'envoi du formulaire:", error);
+      setFormError(errorMessage);
       toast({
         title: "Erreur",
-        description: "Une erreur inattendue est survenue.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
