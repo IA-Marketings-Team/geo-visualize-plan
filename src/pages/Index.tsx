@@ -1,261 +1,81 @@
-
-import React, { useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PageLayout from '../components/PageLayout';
 import Hero from '../components/Hero';
+import AnimatedSection from '../components/AnimatedSection';
 import Services from '../components/Services';
 import ContactSection from '../components/ContactSection';
-import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
-import AnimatedSection from '../components/AnimatedSection';
-import { Building, Users, Award } from 'lucide-react';
-import { Link } from "react-router";
-
+import { ArrowRight } from 'lucide-react';
+import { useProjects } from '@/hooks/useDataApi';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Index: React.FC = () => {
-  // For animating elements when they come into view
-  useEffect(() => {
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      
-      elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (elementTop < windowHeight * 0.9) {
-          element.classList.add('active');
-        }
-      });
-    };
-    
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll(); // Initial check
-    
-    return () => window.removeEventListener('scroll', animateOnScroll);
-  }, []);
+  const { projects, loading } = useProjects();
 
-  // Project showcase data
-  const projects = [
-    {
-      imageSrc: "/architecture1.PNG",
-      title: "Résidence Les Terrasses",
-      category: "Plan de façade"
-    },
-    {
-      imageSrc: "/architecture2.PNG",
-      title: "Loft Urban Design",
-      category: "Plan d'intérieur"
-    },
-    {
-      imageSrc: "/coupe1.PNG",
-      title: "Parc Central",
-      category: "Plan topographique"
-    },
-    {
-      imageSrc: "/coupe2.PNG",
-      title: "Complexe Harmonie",
-      category: "Rendu réaliste"
-    },
-    {
-      imageSrc: "division.PNG",
-      title: "Maison de la Colline",
-      category: "Plan de toiture"
-    },
-    {
-      imageSrc: "interieur1.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "interieur2.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "infrastructure.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "mep.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "plan_façade.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "plan_façade2.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "rendu_interieur.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "rendu_interieur2.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    },
-    {
-      imageSrc: "structure.PNG",
-      title: "Bureaux Transparence",
-      category: "Coupe architecturale"
-    }
-  ];
+  // Filtrer les projets pour n'afficher que les 6 plus récents
+  const featuredProjects = projects.slice(0, 6);
 
   return (
-    <div className="min-h-screen antialiased">
-      <Navbar />
+    <PageLayout>
+      <Hero />
       
-      <main>
-        <Hero />
-        
-        <Services />
-        
-        {/* Projects Section */}
-        <section id="projets" className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <AnimatedSection className="text-center mb-16">
-              <span className="inline-block px-3 py-1 bg-geoplan-red/10 text-geoplan-red rounded-full text-sm font-medium mb-3">
-                Nos Projets
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-                Projets récents
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Découvrez notre expertise à travers une sélection de nos réalisations récentes.
-              </p>
-            </AnimatedSection>
-            <div className=" flex marquee-container overflow-hidden">
-            <div className="flex animate-marquee gap-8">
-              {projects.map((project, index) => (
-                <ProjectCard
-                  key={index}
-                  imageSrc={project.imageSrc}
-                  
-                  delay={100 + index * 100}
-                />
-              ))}
-            </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* About Section */}
-        <section id="à-propos" className="py-20 bg-gradient-to-b from-geoplan-darkblue to-black text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <AnimatedSection delay={100} direction="right">
-                <div className="bg-geoplan-blue/10 backdrop-blur-md border border-white/10 rounded-xl p-8 h-full">
-                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                    À propos de <span className="text-geoplan-red">Geo</span>Plan
-                  </h2>
-                  <p className="text-white/80 mb-6 leading-relaxed">
-                    Depuis plus de 15 ans, GeoPlan s'est imposé comme un leader dans la création de plans et de visualisations architecturales. Notre équipe d'experts combine des compétences techniques pointues et une sensibilité esthétique pour offrir des solutions sur mesure.
-                  </p>
-                  <p className="text-white/80 mb-6 leading-relaxed">
-                    Nous utilisons les technologies les plus avancées pour produire des plans précis et des rendus photoréalistes qui répondent aux besoins spécifiques de chaque projet, qu'il s'agisse d'architecture, d'urbanisme ou d'aménagement paysager.
-                  </p>
-                  
-                  <div className="grid grid-cols-3 gap-4 mt-8">
-                    <div className="text-center">
-                      <span className="block text-3xl font-bold text-geoplan-red mb-1">250+</span>
-                      <span className="text-sm text-white/70">Projets réalisés</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-3xl font-bold text-geoplan-red mb-1">15+</span>
-                      <span className="text-sm text-white/70">Années d'expérience</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-3xl font-bold text-geoplan-red mb-1">50+</span>
-                      <span className="text-sm text-white/70">Clients satisfaits</span>
-                    </div>
+      <Services />
+      
+      {/* Section Projets Récents */}
+      <section id="projects" className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <AnimatedSection className="text-center mb-16">
+            <span className="inline-block px-3 py-1 bg-geoplan-red/10 text-geoplan-red rounded-full text-sm font-medium mb-3">
+              Nos Réalisations
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              Découvrez nos projets récents
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explorez une sélection de nos réalisations les plus récentes, illustrant notre expertise et notre savoir-faire dans différents domaines.
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {loading ? (
+              Array(6).fill(null).map((_, index) => (
+                <div key={index} className="animate-pulse space-y-3">
+                  <Skeleton className="h-48 w-full rounded-md bg-muted" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-3/4 bg-muted" />
+                    <Skeleton className="h-4 w-1/2 bg-muted" />
                   </div>
                 </div>
-              </AnimatedSection>
-              
-              <div className="space-y-6">
-                <AnimatedSection delay={200} direction="right">
-                  <div className="flex bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-                    <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Building className="h-6 w-6 text-geoplan-red" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">Expertise technique</h3>
-                      <p className="text-white/80 text-sm">
-                        Notre équipe maîtrise parfaitement les logiciels et techniques les plus avancés pour une précision sans compromis.
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-                
-                <AnimatedSection delay={300} direction="right">
-                  <div className="flex bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-                    <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Users className="h-6 w-6 text-geoplan-red" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">Approche personnalisée</h3>
-                      <p className="text-white/80 text-sm">
-                        Chaque projet est unique, c'est pourquoi nous adaptons nos méthodes et solutions à vos besoins spécifiques.
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-                
-                <AnimatedSection delay={400} direction="right">
-                  <div className="flex bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-                    <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Award className="h-6 w-6 text-geoplan-red" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">Qualité garantie</h3>
-                      <p className="text-white/80 text-sm">
-                        Nous nous engageons à fournir des livrables d'une qualité irréprochable, dans les délais impartis et selon vos spécifications.
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              </div>
-            </div>
+              ))
+            ) : (
+              // Map through projects with proper props
+              featuredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  title={project.title}
+                  category={project.category}
+                  imageSrc={project.image_src}
+                  delay={100 + index * 100}
+                />
+              ))
+            )}
           </div>
-        </section>
-        
-        <ContactSection />
-      </main>
+          
+          <AnimatedSection className="text-center mt-12">
+            <Link 
+              to="/references" 
+              className="inline-flex items-center text-geoplan-red hover:text-geoplan-red/80 font-medium group"
+            >
+              Voir tous nos projets 
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
       
-      <Footer />
-      
-      {/* Scroll to top button - appears when scrolling down */}
-      <div className="flex gap-3" />
-      <a href='/contact'>
-      <button className="fixed bottom-7 right-20 bg-geoplan-red w-auto p-2 rounded flex items-center justify-center text-white shadow-lg transform transition-transform hover:-translate-y-2 focus:outline-none"
-      style={{ 
-        opacity: 0.8,
-        zIndex: 40
-      }}
-      > 
-      Demander un devis
-      </button>
-      </a>
-      <button 
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 bg-geoplan-red w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg transform transition-transform hover:scale-110 focus:outline-none"
-        aria-label="Scroll to top"
-        style={{ 
-          opacity: 0.8,
-          zIndex: 40
-        }}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m18 15-6-6-6 6"/>
-        </svg>
-      </button>
-    </div>
+      <ContactSection />
+    </PageLayout>
   );
 };
 

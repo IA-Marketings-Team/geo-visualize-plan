@@ -7,6 +7,7 @@ import { MapPin, Building, PenTool, Mountain, Lightbulb } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { useServices } from '@/hooks/useDataApi';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent } from '@/components/ui/card';
 
 // Fonction pour mapper les noms d'icônes aux composants Lucide
 const getIconComponent = (iconName: string) => {
@@ -120,41 +121,43 @@ const Services: React.FC = () => {
             ) : (
               displayServices.map((service, index) => (
                 <AnimatedSection key={service.id} delay={100 * index} className="w-full">
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 !== 0 ? 'lg:grid-flow-col-dense' : ''}`}>
-                    <div className={`order-2 ${index % 2 !== 0 ? 'lg:order-1' : 'lg:order-2'}`}>
-                      <div className="overflow-hidden rounded-xl shadow-xl">
-                        <img 
-                          src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
-                          alt={service.title} 
-                          className="w-full h-80 object-cover transition-transform duration-500 hover:scale-110" 
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className={`order-1 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                      <div className="flex items-center mb-4">
-                        <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          {getIconComponent(service.icon)}
+                  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 items-center ${index % 2 !== 0 ? 'lg:grid-flow-col-dense' : ''}`}>
+                      <div className={`order-2 ${index % 2 !== 0 ? 'lg:order-1' : 'lg:order-2'}`}>
+                        <div className="overflow-hidden">
+                          <img 
+                            src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
+                            alt={service.title} 
+                            className="w-full h-80 object-cover transition-transform duration-500 hover:scale-110" 
+                          />
                         </div>
-                        <h3 className="text-2xl font-display font-bold text-geoplan-red">{service.title}</h3>
                       </div>
                       
-                      <p className="text-muted-foreground mb-6 leading-relaxed">
-                        {service.description}
-                      </p>
-                      
-                      <Separator className="my-6" />
-                      
-                      <div className="mt-8">
-                        <a 
-                          href="#contact" 
-                          className="inline-flex items-center justify-center bg-geoplan-red hover:bg-geoplan-red/90 text-white py-3 px-6 rounded-md font-medium transition-all duration-300 hover-lift"
-                        >
-                          Demander un devis
-                        </a>
-                      </div>
+                      <CardContent className={`order-1 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'} p-8`}>
+                        <div className="flex items-center mb-4">
+                          <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            {getIconComponent(service.icon)}
+                          </div>
+                          <h3 className="text-2xl font-display font-bold text-geoplan-red">{service.title}</h3>
+                        </div>
+                        
+                        <p className="text-muted-foreground mb-6 leading-relaxed">
+                          {service.description}
+                        </p>
+                        
+                        <Separator className="my-6" />
+                        
+                        <div className="mt-8">
+                          <a 
+                            href="#contact" 
+                            className="inline-flex items-center justify-center bg-geoplan-red hover:bg-geoplan-red/90 text-white py-3 px-6 rounded-md font-medium transition-all duration-300 hover-lift"
+                          >
+                            Demander un devis
+                          </a>
+                        </div>
+                      </CardContent>
                     </div>
-                  </div>
+                  </Card>
                 </AnimatedSection>
               ))
             )}
