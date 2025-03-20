@@ -38,31 +38,31 @@ const Services: React.FC = () => {
     {
       id: '1',
       title: 'Plans 2D',
-      description: 'Création de plans précis et à l'échelle pour vos projets d'architecture et d'urbanisme. Nos plans 2D respectent les normes en vigueur et sont livrés dans les formats de votre choix.',
+      description: "Création de plans précis et à l'échelle pour vos projets d'architecture et d'urbanisme. Nos plans 2D respectent les normes en vigueur et sont livrés dans les formats de votre choix.",
       icon: 'PenTool'
     },
     {
       id: '2',
       title: 'Modélisation 3D',
-      description: 'Modélisation tridimensionnelle de vos bâtiments et espaces, permettant une visualisation complète de votre projet sous tous les angles et à différentes échelles.',
+      description: "Modélisation tridimensionnelle de vos bâtiments et espaces, permettant une visualisation complète de votre projet sous tous les angles et à différentes échelles.",
       icon: 'Building'
     },
     {
       id: '3',
       title: 'Plans topographique',
-      description: 'Relevés et plans topographiques de haute précision pour vos terrains et zones d'intervention, intégrant les courbes de niveau et les éléments naturels du site.',
+      description: "Relevés et plans topographiques de haute précision pour vos terrains et zones d'intervention, intégrant les courbes de niveau et les éléments naturels du site.",
       icon: 'Mountain'
     },
     {
       id: '4',
       title: 'SIG',
-      description: 'Systèmes d'Information Géographique complets pour la gestion, l'analyse et la visualisation de vos données spatiales et informations géographiques.',
+      description: "Systèmes d'Information Géographique complets pour la gestion, l'analyse et la visualisation de vos données spatiales et informations géographiques.",
       icon: 'MapPin'
     },
     {
       id: '5',
       title: 'Rendus réalistes',
-      description: 'Images de synthèse photoréalistes de vos projets pour une communication efficace et impactante, tant pour les présentations commerciales que pour les concours.',
+      description: "Images de synthèse photoréalistes de vos projets pour une communication efficace et impactante, tant pour les présentations commerciales que pour les concours.",
       icon: 'Lightbulb'
     }
   ];
