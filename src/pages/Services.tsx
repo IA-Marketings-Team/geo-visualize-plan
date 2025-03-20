@@ -25,13 +25,22 @@ const getIconComponent = (iconName: string) => {
 const Services: React.FC = () => {
   const { services, loading } = useServices();
 
-  // Images correspondant à chaque service
+  // Images principales correspondant à chaque service
   const serviceImages = {
     'Plans 2D': '/Plan2d(1).jpeg',
     'Modélisation 3D': '/modelisation.jpeg',
     'Plans topographique': '/topo1.png',
     'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
     'Rendus réalistes': '/rendu_interieur.PNG'
+  };
+
+  // Images secondaires pour chaque service
+  const secondaryImages = {
+    'Plans 2D': '/plan_façade.PNG',
+    'Modélisation 3D': '/architecture2.PNG',
+    'Plans topographique': '/division.PNG',
+    'SIG': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop',
+    'Rendus réalistes': '/rendu_interieur2.PNG'
   };
 
   // Service par défaut si le backend ne retourne pas de données
@@ -122,23 +131,32 @@ const Services: React.FC = () => {
               displayServices.map((service, index) => (
                 <AnimatedSection key={service.id} delay={100 * index} className="w-full">
                   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 items-center ${index % 2 !== 0 ? 'lg:grid-flow-col-dense' : ''}`}>
-                      <div className={`order-2 ${index % 2 !== 0 ? 'lg:order-1' : 'lg:order-2'}`}>
-                        <div className="overflow-hidden">
-                          <img 
-                            src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
-                            alt={service.title} 
-                            className="w-full h-80 object-cover transition-transform duration-500 hover:scale-110" 
-                          />
+                    <div className={`grid grid-cols-1 lg:grid-cols-6 gap-0 items-center ${index % 2 !== 0 ? 'lg:grid-flow-col-dense' : ''}`}>
+                      <div className={`lg:col-span-4 order-2 ${index % 2 !== 0 ? 'lg:order-1' : 'lg:order-2'}`}>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="overflow-hidden">
+                            <img 
+                              src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
+                              alt={`${service.title} - image principale`} 
+                              className="w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
+                            />
+                          </div>
+                          <div className="overflow-hidden">
+                            <img 
+                              src={secondaryImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
+                              alt={`${service.title} - image secondaire`} 
+                              className="w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
+                            />
+                          </div>
                         </div>
                       </div>
                       
-                      <CardContent className={`order-1 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'} p-8`}>
+                      <CardContent className={`lg:col-span-2 order-1 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'} p-8`}>
                         <div className="flex items-center mb-4">
                           <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
                             {getIconComponent(service.icon)}
                           </div>
-                          <h3 className="text-2xl font-display font-bold text-geoplan-red">{service.title}</h3>
+                          <h3 className="text-xl font-display font-bold text-geoplan-red">{service.title}</h3>
                         </div>
                         
                         <p className="text-muted-foreground mb-6 leading-relaxed">
