@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
@@ -20,7 +21,7 @@ const Navbar: React.FC = () => {
   const navItems = [
     { name: 'Accueil', path: '/' },
     { name: 'Notre Groupe', path: '/notre-groupe' },
-    { name: 'Services', path: '/departements' },
+    { name: 'Services', path: '/services' },
     { name: 'Carrières', path: '/carrieres' },
     { name: 'RSE', path: '/rse' },
     { name: 'Actualités', path: '/actualites' },

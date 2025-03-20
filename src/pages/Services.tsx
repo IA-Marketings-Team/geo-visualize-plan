@@ -3,9 +3,9 @@ import React from 'react';
 import PageLayout from '../components/PageLayout';
 import PageHeader from '../components/PageHeader';
 import AnimatedSection from '../components/AnimatedSection';
-import { MapPin, Building, Mountain, Globe, Code } from 'lucide-react';
+import { MapPin, Building, PenTool, Mountain, Lightbulb } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { useDepartments } from '@/hooks/useDataApi';
+import { useServices } from '@/hooks/useDataApi';
 import { Skeleton } from '@/components/ui/skeleton';
 
 // Fonction pour mapper les noms d'icônes aux composants Lucide
@@ -13,19 +13,62 @@ const getIconComponent = (iconName: string) => {
   const icons: Record<string, React.ReactElement> = {
     'MapPin': <MapPin className="h-6 w-6 text-geoplan-red" />,
     'Building': <Building className="h-6 w-6 text-geoplan-red" />,
+    'PenTool': <PenTool className="h-6 w-6 text-geoplan-red" />,
     'Mountain': <Mountain className="h-6 w-6 text-geoplan-red" />,
-    'Globe': <Globe className="h-6 w-6 text-geoplan-red" />,
-    'Code': <Code className="h-6 w-6 text-geoplan-red" />
+    'Lightbulb': <Lightbulb className="h-6 w-6 text-geoplan-red" />
   };
   
   return icons[iconName] || <MapPin className="h-6 w-6 text-geoplan-red" />;
 };
 
-const Departements: React.FC = () => {
-  const { departments, loading } = useDepartments();
+const Services: React.FC = () => {
+  const { services, loading } = useServices();
+
+  // Images correspondant à chaque service
+  const serviceImages = {
+    'Plans 2D': 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop',
+    'Modélisation 3D': 'https://images.unsplash.com/photo-1545987796-200677ee1011?q=80&w=2070&auto=format&fit=crop',
+    'Plans topographique': 'https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?q=80&w=2070&auto=format&fit=crop',
+    'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
+    'Rendus réalistes': 'https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=2070&auto=format&fit=crop'
+  };
+
+  // Service par défaut si le backend ne retourne pas de données
+  const defaultServices = [
+    {
+      id: '1',
+      title: 'Plans 2D',
+      description: 'Création de plans précis et à l'échelle pour vos projets d'architecture et d'urbanisme. Nos plans 2D respectent les normes en vigueur et sont livrés dans les formats de votre choix.',
+      icon: 'PenTool'
+    },
+    {
+      id: '2',
+      title: 'Modélisation 3D',
+      description: 'Modélisation tridimensionnelle de vos bâtiments et espaces, permettant une visualisation complète de votre projet sous tous les angles et à différentes échelles.',
+      icon: 'Building'
+    },
+    {
+      id: '3',
+      title: 'Plans topographique',
+      description: 'Relevés et plans topographiques de haute précision pour vos terrains et zones d'intervention, intégrant les courbes de niveau et les éléments naturels du site.',
+      icon: 'Mountain'
+    },
+    {
+      id: '4',
+      title: 'SIG',
+      description: 'Systèmes d'Information Géographique complets pour la gestion, l'analyse et la visualisation de vos données spatiales et informations géographiques.',
+      icon: 'MapPin'
+    },
+    {
+      id: '5',
+      title: 'Rendus réalistes',
+      description: 'Images de synthèse photoréalistes de vos projets pour une communication efficace et impactante, tant pour les présentations commerciales que pour les concours.',
+      icon: 'Lightbulb'
+    }
+  ];
 
   // Affichage des squelettes pendant le chargement
-  const renderDepartmentSkeletons = () => {
+  const renderServiceSkeletons = () => {
     return Array(5).fill(null).map((_, index) => (
       <div key={index} className="mb-16">
         <Skeleton className="h-[400px] w-full rounded-lg mb-6" />
@@ -48,11 +91,14 @@ const Departements: React.FC = () => {
     ));
   };
 
+  // Utilise les services du backend ou les services par défaut si aucune donnée
+  const displayServices = services.length > 0 ? services : defaultServices;
+
   return (
     <PageLayout>
       <PageHeader 
-        title="Nos Départements" 
-        subtitle="Découvrez nos équipes spécialisées et leurs domaines d'expertise dans le traitement des données géographiques."
+        title="Nos Services" 
+        subtitle="Découvrez l'éventail complet de nos services cartographiques et solutions de plans pour tous vos projets."
         backgroundImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
       />
       
@@ -60,26 +106,26 @@ const Departements: React.FC = () => {
         <div className="container mx-auto px-4 md:px-6">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Une expertise complète en cartographie
+              Notre expertise cartographique à votre service
             </h2>
             <div className="w-20 h-1 bg-geoplan-red mx-auto mb-6"></div>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Chez GeoPlan, nous avons organisé nos activités en départements spécialisés pour mieux répondre aux besoins spécifiques de nos clients dans différents domaines de la cartographie et de la modélisation.
+              Chez GeoPlan, nous proposons une gamme complète de services cartographiques de haute précision, adaptés aux besoins spécifiques de chaque client et chaque projet.
             </p>
           </AnimatedSection>
 
           <div className="space-y-20">
             {loading ? (
-              renderDepartmentSkeletons()
+              renderServiceSkeletons()
             ) : (
-              departments.map((dept, index) => (
-                <AnimatedSection key={dept.id} delay={100 * index} className="w-full">
+              displayServices.map((service, index) => (
+                <AnimatedSection key={service.id} delay={100 * index} className="w-full">
                   <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 !== 0 ? 'lg:grid-flow-col-dense' : ''}`}>
                     <div className={`order-2 ${index % 2 !== 0 ? 'lg:order-1' : 'lg:order-2'}`}>
                       <div className="overflow-hidden rounded-xl shadow-xl">
                         <img 
-                          src={dept.image_src} 
-                          alt={dept.name} 
+                          src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
+                          alt={service.title} 
                           className="w-full h-80 object-cover transition-transform duration-500 hover:scale-110" 
                         />
                       </div>
@@ -88,35 +134,23 @@ const Departements: React.FC = () => {
                     <div className={`order-1 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'}`}>
                       <div className="flex items-center mb-4">
                         <div className="bg-geoplan-red/10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          {getIconComponent(dept.icon)}
+                          {getIconComponent(service.icon)}
                         </div>
-                        <h3 className="text-2xl font-display font-bold text-geoplan-red">{dept.name}</h3>
+                        <h3 className="text-2xl font-display font-bold text-geoplan-red">{service.title}</h3>
                       </div>
                       
-                      <h4 className="text-xl font-semibold text-foreground mb-4">{dept.title}</h4>
-                      
                       <p className="text-muted-foreground mb-6 leading-relaxed">
-                        {dept.description}
+                        {service.description}
                       </p>
                       
                       <Separator className="my-6" />
-                      
-                      <h5 className="font-medium text-foreground mb-4">Nos services :</h5>
-                      <ul className="space-y-2">
-                        {dept.services?.map((service, i) => (
-                          <li key={i} className="flex items-start">
-                            <span className="text-geoplan-red mr-2">•</span>
-                            <span className="text-muted-foreground">{service}</span>
-                          </li>
-                        ))}
-                      </ul>
                       
                       <div className="mt-8">
                         <a 
                           href="#contact" 
                           className="inline-flex items-center justify-center bg-geoplan-red hover:bg-geoplan-red/90 text-white py-3 px-6 rounded-md font-medium transition-all duration-300 hover-lift"
                         >
-                          En savoir plus
+                          Demander un devis
                         </a>
                       </div>
                     </div>
@@ -131,4 +165,4 @@ const Departements: React.FC = () => {
   );
 };
 
-export default Departements;
+export default Services;

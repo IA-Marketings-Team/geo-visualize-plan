@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import NotrePage from "./pages/NotrePage";
-import Departements from "./pages/Departements";
+import Services from "./pages/Services";
 import References from "./pages/References";
 import Carrieres from "./pages/Carrieres";
 import RSE from "./pages/RSE";
@@ -25,7 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/notre-groupe" element={<NotrePage />} />
-          <Route path="/departements" element={<Departements />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/references" element={<References />} />
           <Route path="/carrieres" element={<Carrieres />} />
           <Route path="/rse" element={<RSE />} />

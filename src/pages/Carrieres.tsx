@@ -5,11 +5,56 @@ import PageHeader from '../components/PageHeader';
 import AnimatedSection from '../components/AnimatedSection';
 import { Briefcase, Heart, GraduationCap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useJobOffers } from '@/hooks/useDataApi';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const Carrieres: React.FC = () => {
   const { jobOffers, loading } = useJobOffers();
+
+  // Offres d'emploi par défaut si le backend ne retourne pas de données
+  const defaultJobOffers = [
+    {
+      id: '1',
+      title: 'Cartographe spécialiste Plans 2D',
+      location: 'Paris, France',
+      type: 'CDI',
+      description: 'Rejoignez notre équipe pour créer des plans 2D de haute précision pour nos clients. Vous maîtrisez AutoCAD et avez une expérience en dessin technique.',
+      date: '03 mars 2024'
+    },
+    {
+      id: '2',
+      title: 'Modélisateur 3D confirmé',
+      location: 'Lyon, France',
+      type: 'CDI',
+      description: 'Nous recherchons un expert en modélisation 3D pour créer des maquettes virtuelles détaillées pour nos clients dans le secteur de l\'architecture et de l\'urbanisme.',
+      date: '15 avril 2024'
+    },
+    {
+      id: '3',
+      title: 'Ingénieur topographe',
+      location: 'Marseille, France',
+      type: 'CDI',
+      description: 'Pour renforcer notre équipe de plans topographiques, nous recrutons un ingénieur spécialisé avec expérience dans les relevés de terrain précis.',
+      date: '28 février 2024'
+    },
+    {
+      id: '4',
+      title: 'Développeur SIG',
+      location: 'Bordeaux, France',
+      type: 'CDI',
+      description: 'Rejoignez notre département SIG pour développer et maintenir des solutions cartographiques avancées pour nos clients institutionnels et privés.',
+      date: '10 mai 2024'
+    },
+    {
+      id: '5',
+      title: 'Infographiste 3D - Rendus réalistes',
+      location: 'Nantes, France',
+      type: 'CDD (6 mois)',
+      description: 'Nous cherchons un talent pour créer des rendus photoréalistes de haute qualité pour nos projets architecturaux et urbains les plus prestigieux.',
+      date: '22 avril 2024'
+    }
+  ];
 
   // Affichage des squelettes pendant le chargement
   const renderJobSkeletons = () => {
@@ -33,6 +78,9 @@ const Carrieres: React.FC = () => {
       </AnimatedSection>
     ));
   };
+
+  // Utilise les offres du backend ou les offres par défaut si aucune donnée
+  const displayJobOffers = jobOffers.length > 0 ? jobOffers : defaultJobOffers;
 
   return (
     <PageLayout>
@@ -119,7 +167,7 @@ const Carrieres: React.FC = () => {
               {loading ? (
                 renderJobSkeletons()
               ) : (
-                jobOffers.map((job, index) => (
+                displayJobOffers.map((job, index) => (
                   <AnimatedSection key={job.id} delay={100 + index * 50}>
                     <Card className="hover:shadow-md transition-shadow">
                       <CardHeader>
@@ -128,9 +176,11 @@ const Carrieres: React.FC = () => {
                             <CardTitle className="text-xl">{job.title}</CardTitle>
                             <p className="text-sm text-muted-foreground mt-1">{job.location} | {job.type}</p>
                           </div>
-                          <span className="bg-geoplan-red/10 text-geoplan-red text-xs px-2 py-1 rounded-full">
-                            Nouveau
-                          </span>
+                          <div className="flex items-center">
+                            <Badge variant="outline" className="bg-geoplan-red/10 text-geoplan-red border-geoplan-red/20">
+                              {job.date ? `Publié le ${job.date}` : 'Nouveau'}
+                            </Badge>
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent>

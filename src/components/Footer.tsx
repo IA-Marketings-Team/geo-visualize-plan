@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                 'Rendus réalistes'
               ].map((service, index) => (
                 <li key={index}>
-                  <Link to="/departements" className="text-white/70 hover:text-white text-sm transition-colors duration-200">
+                  <Link to="/services" className="text-white/70 hover:text-white text-sm transition-colors duration-200">
                     {service}
                   </Link>
                 </li>
@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
               {[
                 { name: 'Accueil', path: '/' },
                 { name: 'Notre Groupe', path: '/notre-groupe' },
-                { name: 'Départements', path: '/departements' },
+                { name: 'Services', path: '/services' },
                 { name: 'Références', path: '/references' },
                 { name: 'Carrières', path: '/carrieres' },
                 { name: 'RSE', path: '/rse' },
