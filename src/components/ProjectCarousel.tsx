@@ -5,7 +5,7 @@ const ProjectCarousel: React.FC = () => {
   const projectImages = [
     '/architecture1.PNG',
     '/architecture2.PNG',
-    '/caim.jpg',
+    '/plan.jpg',
     '/coupe1.PNG',
     '/coupe2.PNG',
     '/division.PNG',

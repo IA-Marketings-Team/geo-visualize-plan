@@ -30,7 +30,7 @@ const Services: React.FC = () => {
   const serviceImages = {
     'Plans 2D': '/Plan2d(1).jpeg',
     'Modélisation 3D': '/modelisation.jpeg',
-    'Plans topographique': '/topo1.png',
+    'Plans topographiques': '/topographie.png',
     'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
     'Rendus réalistes': '/rendu_interieur.PNG'
   };
@@ -51,7 +51,7 @@ const Services: React.FC = () => {
     },
     {
       id: '3',
-      title: 'Plans topographique',
+      title: 'Plans topographiques',
       description: "Relevés et plans topographiques de haute précision pour vos terrains et zones d'intervention.",
       icon: 'Mountain'
     },
@@ -122,8 +122,9 @@ const Services: React.FC = () => {
                     <div className="rounded-lg overflow-hidden">
                       <img 
                         src={serviceImages[service.title]} 
-                        alt={service.title} 
-                        className="w-full h-auto object-cover"
+                        alt={service.title}
+                        style={{height:"200px"}}
+                        className="w-full object-cover"
                       />
                     </div>
                     <p className="text-muted-foreground">{service.description}</p>

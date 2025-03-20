@@ -29,16 +29,16 @@ const Services: React.FC = () => {
   const serviceImages = {
     'Plans 2D': '/Plan2d(1).jpeg',
     'Modélisation 3D': '/modelisation.jpeg',
-    'Plans topographique': '/topo1.png',
+    'Plans topographiques': '/Planstopographiques.png',
     'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
     'Rendus réalistes': '/rendu_interieur.PNG'
   };
 
   // Images secondaires pour chaque service
   const secondaryImages = {
-    'Plans 2D': '/plan_façade.PNG',
+    'Plans 2D': '/1.png',
     'Modélisation 3D': '/architecture2.PNG',
-    'Plans topographique': '/division.PNG',
+    'Plans topographiques': '/topographie.png',
     'SIG': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop',
     'Rendus réalistes': '/rendu_interieur2.PNG'
   };
@@ -136,16 +136,20 @@ const Services: React.FC = () => {
                         <div className="grid grid-cols-2 gap-2">
                           <div className="overflow-hidden">
                             <img 
-                              src={serviceImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
+                              src={serviceImages[service.title]}
+                              onError={(e) => {
+                                console.error(`Erreur de chargement de l'image pour ${service.title}`);
+                                e.target.onerror = null; // évite les boucles infinies
+                              }} 
                               alt={`${service.title} - image principale`} 
-                              className="w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
+                              className="rounded w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
                             />
                           </div>
                           <div className="overflow-hidden">
                             <img 
                               src={secondaryImages[service.title] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop'} 
                               alt={`${service.title} - image secondaire`} 
-                              className="w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
+                              className="rounded w-full h-60 object-cover transition-transform duration-500 hover:scale-110" 
                             />
                           </div>
                         </div>
@@ -167,7 +171,7 @@ const Services: React.FC = () => {
                         
                         <div className="mt-8">
                           <a 
-                            href="#contact" 
+                            href="/contact" 
                             className="inline-flex items-center justify-center bg-geoplan-red hover:bg-geoplan-red/90 text-white py-3 px-6 rounded-md font-medium transition-all duration-300 hover-lift"
                           >
                             Demander un devis
