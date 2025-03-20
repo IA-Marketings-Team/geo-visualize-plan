@@ -27,11 +27,11 @@ const Services: React.FC = () => {
 
   // Images correspondant à chaque service
   const serviceImages = {
-    'Plans 2D': 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop',
-    'Modélisation 3D': 'https://images.unsplash.com/photo-1545987796-200677ee1011?q=80&w=2070&auto=format&fit=crop',
-    'Plans topographique': 'https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?q=80&w=2070&auto=format&fit=crop',
+    'Plans 2D': '/Plan2d(1).jpeg',
+    'Modélisation 3D': '/modelisation.jpeg',
+    'Plans topographique': '/topo1.png',
     'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
-    'Rendus réalistes': 'https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=2070&auto=format&fit=crop'
+    'Rendus réalistes': '/rendu_interieur.PNG'
   };
 
   // Service par défaut si le backend ne retourne pas de données
