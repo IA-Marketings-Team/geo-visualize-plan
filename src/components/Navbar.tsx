@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
@@ -28,11 +27,9 @@ const Navbar: React.FC = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
-  console.log('Current path:', location.pathname); // Debugging line
-
   return (
     <header
-      className={`fixed top-0 bg-black-600 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
         isScrolled
           ? 'py-3 bg-black/80 backdrop-blur-sm shadow-md'
           : 'py-6 bg-transparent'
@@ -49,9 +46,9 @@ const Navbar: React.FC = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`text-sm font-medium text-white link-underline transition-colors duration-200 ${
-                isScrolled ? 'text-foreground hover:text-geoplan-red' : 'text-white hover:text-geoplan-red'
-              } ${location.pathname === item.path ? 'text-red-500 !important' : 'text-gray'}`}
+              className={`text-sm font-medium transition-colors duration-200 ${
+                isScrolled ? 'text-white hover:text-geoplan-red' : 'text-[#ffffff] hover:text-geoplan-red'
+              } ${location.pathname === item.path ? 'text-[#E63946] !important' : ''}`}
             >
               {item.name}
             </Link>
@@ -80,7 +77,7 @@ const Navbar: React.FC = () => {
                   key={item.name}
                   to={item.path}
                   className={`text-foreground text-lg font-medium hover:text-geoplan-red transition-colors duration-200 ${
-                    location.pathname === item.path ? 'text-geoplan-red !important' : ''
+                    location.pathname === item.path ? 'text-geoplan-red' : ''
                   }`}
                   style={{ animationDelay: `${i * 50}ms` }}
                   onClick={() => setIsMobileMenuOpen(false)}

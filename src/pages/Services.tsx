@@ -30,7 +30,7 @@ const Services: React.FC = () => {
     'Plans 2D': '/Plan2d(1).jpeg',
     'Modélisation 3D': '/modelisation.jpeg',
     'Plans topographiques': '/Planstopographiques.png',
-    'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
+    'SIG': '/sig.PNG',
     'Rendus réalistes': '/rendu_interieur.PNG'
   };
 
@@ -39,7 +39,7 @@ const Services: React.FC = () => {
     'Plans 2D': '/1.png',
     'Modélisation 3D': '/architecture2.PNG',
     'Plans topographiques': '/topographie.png',
-    'SIG': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop',
+    'SIG': '/sig2.PNG',
     'Rendus réalistes': '/rendu_interieur2.PNG'
   };
 

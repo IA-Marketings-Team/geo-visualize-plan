@@ -59,8 +59,8 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <address className="not-italic text-white/70 text-sm space-y-2">
               <p>123 Avenue de la Cartographie</p>
-              <p>75001 Paris, France</p>
-              <p className="mt-4">contact@geoplan.fr</p>
+              <p>Antananarivo, Madagascar</p>
+              <p className="mt-4">contact.mdgeo@gmail.com</p>
               <p>+33 1 23 45 67 89</p>
             </address>
           </div>
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} GeoPlan. Tous droits réservés.
+            © {new Date().getFullYear()} Geo-architectural. Tous droits réservés.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <Link to="/mentions-legales" className="text-white/60 hover:text-white transition-colors duration-200">

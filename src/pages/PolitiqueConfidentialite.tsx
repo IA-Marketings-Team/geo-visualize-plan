@@ -18,7 +18,7 @@ const PolitiqueConfidentialite: React.FC = () => {
           <AnimatedSection className="prose prose-lg max-w-4xl mx-auto">
             <h2 className="text-2xl font-display font-bold mb-6">1. Collecte des données personnelles</h2>
             <p>
-              Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par GeoPlan pour la gestion de notre clientèle et nos prospects.
+              Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par geo-architectural pour la gestion de notre clientèle et nos prospects.
             </p>
             <p>
               Les données collectées sont les suivantes : nom, prénom, adresse email, numéro de téléphone, entreprise.
@@ -48,7 +48,7 @@ const PolitiqueConfidentialite: React.FC = () => {
               Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.
             </p>
             <p>
-              Pour exercer ces droits ou pour toute question sur le traitement de vos données, vous pouvez nous contacter à l'adresse email suivante : rgpd@geoplan.fr.
+              Pour exercer ces droits ou pour toute question sur le traitement de vos données, vous pouvez nous contacter à l'adresse email suivante : rgpd@geo-architectural.fr.
             </p>
 
             <h2 className="text-2xl font-display font-bold mb-6 mt-12">5. Cookies</h2>

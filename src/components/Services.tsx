@@ -31,7 +31,7 @@ const Services: React.FC = () => {
     'Plans 2D': '/Plan2d(1).jpeg',
     'Modélisation 3D': '/modelisation.jpeg',
     'Plans topographiques': '/topographie.png',
-    'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
+    'SIG': '/sig.PNG',
     'Rendus réalistes': '/rendu_interieur.PNG'
   };
 
