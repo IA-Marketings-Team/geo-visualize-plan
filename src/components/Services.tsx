@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ServiceCard from './ServiceCard';
@@ -18,13 +17,14 @@ const getIconComponent = (iconName: string): LucideIcon => {
     'Mountain': Mountain,
     'Lightbulb': Lightbulb
   };
-  
+
   return icons[iconName] || Building;
 };
 
 const Services: React.FC = () => {
   const { services, loading } = useServices();
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Images correspondant à chaque service
   const serviceImages = {
@@ -113,18 +113,19 @@ const Services: React.FC = () => {
                       title={service.title}
                       description={service.description}
                       delay={100 + index * 100}
+                      style={{height:"200px"}} // Assurez-vous que la carte prend toute la hauteur disponible
                     />
                   </div>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[700px]">
                   <DialogTitle className="text-xl font-semibold mb-4 text-geoplan-red">{service.title}</DialogTitle>
                   <div className="space-y-4">
-                    <div className="rounded-lg overflow-hidden">
-                      <img 
-                        src={serviceImages[service.title]} 
+                    <div  className="rounded-lg overflow-hidden h-48"> {/* Fixe la hauteur de l'image */}
+                      <img
+                        src={serviceImages[service.title]}
                         alt={service.title}
-                        style={{height:"200px"}}
-                        className="w-full object-cover"
+                        className="w-full h-full object-cover cursor-pointer"
+                        onClick={() => setSelectedImage(serviceImages[service.title])}
                       />
                     </div>
                     <p className="text-muted-foreground">{service.description}</p>
@@ -143,6 +144,19 @@ const Services: React.FC = () => {
           )}
         </div>
       </div>
+
+      {selectedImage && (
+        <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+          <DialogContent className="sm:max-w-[90%]">
+            <img
+              src={selectedImage}
+              alt="Agrandie"
+              style={{width:"auto", height:'400px'}}
+              className=" m-auto h-auto object-contain"
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
   );
 };

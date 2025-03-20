@@ -15,10 +15,10 @@ const Logo: React.FC<LogoProps> = ({ className = "", size = 'md' }) => {
 
   return (
     <div className={`font-display font-bold tracking-tight select-none ${sizeClasses[size]} ${className}`}>
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-0'>
     
-      <img src='logo.png' style={{width:'40px', height:'auto', borderRadius:'100px'}} className='rounded-circle'/>
-      <div className='flex text-2xl'>
+      <img src='logo.png' style={{width:'70px', height:'auto', borderRadius:'100px'}} className='rounded-circle'/>
+      <div className='flex' style={{fontSize:'30px'}}>
       <span className='text-geoplan-red'>Geo-</span>
       <span className='text-white'>architectural</span>
       </div>
