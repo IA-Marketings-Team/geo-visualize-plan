@@ -19,11 +19,10 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               {[
-                'Plans de façade',
-                'Plans d\'intérieur',
-                'Plans de toiture',
-                'Coupes et sections',
-                'Plans topographiques',
+                'Plans 2D',
+                'Modélisation 3D',
+                'Plans topographique',
+                'SIG',
                 'Rendus réalistes'
               ].map((service, index) => (
                 <li key={index}>

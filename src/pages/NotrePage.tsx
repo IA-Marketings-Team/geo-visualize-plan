@@ -10,7 +10,7 @@ const NotrePage: React.FC = () => {
     <PageLayout>
       <PageHeader 
         title="Notre Groupe" 
-        subtitle="Découvrez l'histoire, la mission et les valeurs qui font de GeoPlan un leader dans le domaine des solutions cartographiques."
+        subtitle="Un leader dans le traitement des données géographiques et des solutions cartographiques."
         backgroundImage="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
       />
       
@@ -29,13 +29,13 @@ const NotrePage: React.FC = () => {
               <h2 className="text-3xl font-display font-bold text-foreground mb-6">Notre Histoire</h2>
               <div className="w-20 h-1 bg-geoplan-red mb-6"></div>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Fondée en 2010 par une équipe d'ingénieurs passionnés par la cartographie et les technologies spatiales, GeoPlan s'est rapidement imposée comme un acteur majeur dans le domaine des solutions cartographiques.
+              Fondée en 2020 par une équipe d’ingénieurs passionnés et visionnaire, GeoPlan s'est rapidement imposée comme un acteur majeur dans le domaine des solutions cartographiques.
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Grâce à notre expertise technique et notre volonté constante d'innover, nous avons développé une gamme complète de services allant des plans 2D traditionnels aux rendus 3D photoréalistes, en passant par des solutions de cartographie numérique avancées.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Aujourd'hui, GeoPlan compte plus de 150 collaborateurs répartis dans nos bureaux en France et à l'international, et accompagne quotidiennement des clients de tous secteurs dans leurs projets d'aménagement et de visualisation spatiale.
+                Aujourd'hui, GeoPlan compte plus de 50 collaborateurs, et accompagne quotidiennement, et accompagne quotidiennement des clients de tous secteurs dans leurs projets d'aménagement et de visualisation spatiale.
               </p>
             </AnimatedSection>
           </div>
@@ -116,19 +116,16 @@ const NotrePage: React.FC = () => {
               </p>
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div className="text-center">
-                  <span className="block text-3xl font-bold text-geoplan-red mb-1">150+</span>
+                  <span className="block text-3xl font-bold text-geoplan-red mb-1">50+</span>
                   <span className="text-sm text-white/70">Collaborateurs</span>
                 </div>
                 <div className="text-center">
                   <span className="block text-3xl font-bold text-geoplan-red mb-1">500+</span>
                   <span className="text-sm text-white/70">Projets réalisés</span>
                 </div>
+               
                 <div className="text-center">
-                  <span className="block text-3xl font-bold text-geoplan-red mb-1">3</span>
-                  <span className="text-sm text-white/70">Bureaux internationaux</span>
-                </div>
-                <div className="text-center">
-                  <span className="block text-3xl font-bold text-geoplan-red mb-1">15+</span>
+                  <span className="block text-3xl font-bold text-geoplan-red mb-1">5+</span>
                   <span className="text-sm text-white/70">Années d'expérience</span>
                 </div>
               </div>
