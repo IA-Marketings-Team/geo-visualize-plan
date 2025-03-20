@@ -1,18 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ServiceCard from './ServiceCard';
 import AnimatedSection from './AnimatedSection';
-import { Building, MapPin, Home, PenTool, Mountain, Lightbulb } from 'lucide-react';
+import { Building, MapPin, PenTool, Mountain, Lightbulb } from 'lucide-react';
 import { useServices } from '@/hooks/useDataApi';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LucideIcon } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 // Fonction pour mapper les noms d'icônes aux composants Lucide
 const getIconComponent = (iconName: string): LucideIcon => {
   const icons: Record<string, LucideIcon> = {
     'Building': Building,
     'MapPin': MapPin,
-    'Home': Home,
     'PenTool': PenTool,
     'Mountain': Mountain,
     'Lightbulb': Lightbulb
@@ -23,10 +24,54 @@ const getIconComponent = (iconName: string): LucideIcon => {
 
 const Services: React.FC = () => {
   const { services, loading } = useServices();
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+
+  // Images correspondant à chaque service
+  const serviceImages = {
+    'Plans 2D': '/Plan2d(1).jpeg',
+    'Modélisation 3D': '/modelisation.jpeg',
+    'Plans topographique': '/topo1.png',
+    'SIG': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop',
+    'Rendus réalistes': '/rendu_interieur.PNG'
+  };
+
+  // Service par défaut si le backend ne retourne pas de données
+  const defaultServices = [
+    {
+      id: '1',
+      title: 'Plans 2D',
+      description: "Création de plans précis et à l'échelle pour vos projets d'architecture et d'urbanisme.",
+      icon: 'PenTool'
+    },
+    {
+      id: '2',
+      title: 'Modélisation 3D',
+      description: "Modélisation tridimensionnelle de vos bâtiments et espaces pour une visualisation complète.",
+      icon: 'Building'
+    },
+    {
+      id: '3',
+      title: 'Plans topographique',
+      description: "Relevés et plans topographiques de haute précision pour vos terrains et zones d'intervention.",
+      icon: 'Mountain'
+    },
+    {
+      id: '4',
+      title: 'SIG',
+      description: "Systèmes d'Information Géographique pour la gestion et l'analyse de vos données spatiales.",
+      icon: 'MapPin'
+    },
+    {
+      id: '5',
+      title: 'Rendus réalistes',
+      description: "Images de synthèse photoréalistes de vos projets pour une communication efficace et impactante.",
+      icon: 'Lightbulb'
+    }
+  ];
 
   // Affichage des squelettes pendant le chargement
   const renderServiceSkeletons = () => {
-    return Array(6).fill(null).map((_, index) => (
+    return Array(5).fill(null).map((_, index) => (
       <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full">
         <div className="flex flex-col h-full space-y-4">
           <Skeleton className="h-12 w-12 rounded-full" />
@@ -36,6 +81,9 @@ const Services: React.FC = () => {
       </div>
     ));
   };
+
+  // Utilise les services du backend ou les services par défaut si aucune donnée
+  const displayServices = services.length > 0 ? services : defaultServices;
 
   return (
     <section id="services" className="py-20 relative overflow-hidden bg-gradient-to-b from-geoplan-darkblue to-black">
@@ -56,14 +104,40 @@ const Services: React.FC = () => {
           {loading ? (
             renderServiceSkeletons()
           ) : (
-            services.map((service, index) => (
-              <ServiceCard
-                key={service.id}
-                icon={getIconComponent(service.icon)}
-                title={service.title}
-                description={service.description}
-                delay={100 + index * 100}
-              />
+            displayServices.map((service, index) => (
+              <Dialog key={service.id}>
+                <DialogTrigger asChild>
+                  <div onClick={() => setSelectedService(service.title)}>
+                    <ServiceCard
+                      icon={getIconComponent(service.icon)}
+                      title={service.title}
+                      description={service.description}
+                      delay={100 + index * 100}
+                    />
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[700px]">
+                  <DialogTitle className="text-xl font-semibold mb-4 text-geoplan-red">{service.title}</DialogTitle>
+                  <div className="space-y-4">
+                    <div className="rounded-lg overflow-hidden">
+                      <img 
+                        src={serviceImages[service.title]} 
+                        alt={service.title} 
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                    <p className="text-muted-foreground">{service.description}</p>
+                    <div className="pt-4">
+                      <Link
+                        to="/services"
+                        className="inline-flex items-center justify-center bg-geoplan-red hover:bg-geoplan-red/90 text-white py-2 px-4 rounded-md font-medium transition-all duration-300"
+                      >
+                        En savoir plus
+                      </Link>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             ))
           )}
         </div>

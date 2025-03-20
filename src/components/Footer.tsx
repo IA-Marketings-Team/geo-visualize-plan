@@ -71,12 +71,12 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} GeoPlan. Tous droits réservés.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
-            <a href="#" className="text-white/60 hover:text-white transition-colors duration-200">
+            <Link to="/mentions-legales" className="text-white/60 hover:text-white transition-colors duration-200">
               Mentions légales
-            </a>
-            <a href="#" className="text-white/60 hover:text-white transition-colors duration-200">
+            </Link>
+            <Link to="/politique-confidentialite" className="text-white/60 hover:text-white transition-colors duration-200">
               Politique de confidentialité
-            </a>
+            </Link>
           </div>
         </div>
       </div>
