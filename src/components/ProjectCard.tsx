@@ -17,12 +17,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <AnimatedSection delay={delay} className="group w-full">
-      <div className="overflow-hidden rounded-lg bg-white shadow-lg hover-lift">
+      <div className="overflow-hidden rounded-lg w-80 bg-white shadow-lg hover-lift">
         <div className="img-hover-zoom h-60 sm:h-72">
           <img 
             src={imageSrc} 
             alt={title} 
-            className="h-full w-full object-cover" 
+            className="h-full w-full object-contain" 
           />
         </div>
         <div className="p-5">

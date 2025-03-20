@@ -8,6 +8,8 @@ import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
 import AnimatedSection from '../components/AnimatedSection';
 import { Building, Users, Award } from 'lucide-react';
+import { Link } from "react-router";
+
 
 const Index: React.FC = () => {
   // For animating elements when they come into view
@@ -34,32 +36,72 @@ const Index: React.FC = () => {
   // Project showcase data
   const projects = [
     {
-      imageSrc: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop",
+      imageSrc: "/architecture1.PNG",
       title: "Résidence Les Terrasses",
       category: "Plan de façade"
     },
     {
-      imageSrc: "/sitting_room.jpg",
+      imageSrc: "/architecture2.PNG",
       title: "Loft Urban Design",
       category: "Plan d'intérieur"
     },
     {
-      imageSrc: "/blueprint.jpg",
+      imageSrc: "/coupe1.PNG",
       title: "Parc Central",
       category: "Plan topographique"
     },
     {
-      imageSrc: "/caim.jpg",
+      imageSrc: "/coupe2.PNG",
       title: "Complexe Harmonie",
       category: "Rendu réaliste"
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=2074&auto=format&fit=crop",
+      imageSrc: "division.PNG",
       title: "Maison de la Colline",
       category: "Plan de toiture"
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1536895058696-a69b1c7ba34f?q=80&w=2070&auto=format&fit=crop",
+      imageSrc: "interieur1.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "interieur2.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "infrastructure.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "mep.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "plan_façade.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "plan_façade2.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "rendu_interieur.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "rendu_interieur2.PNG",
+      title: "Bureaux Transparence",
+      category: "Coupe architecturale"
+    },
+    {
+      imageSrc: "structure.PNG",
       title: "Bureaux Transparence",
       category: "Coupe architecturale"
     }
@@ -88,17 +130,17 @@ const Index: React.FC = () => {
                 Découvrez notre expertise à travers une sélection de nos réalisations récentes.
               </p>
             </AnimatedSection>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className=" flex marquee-container overflow-hidden">
+            <div className="flex animate-marquee gap-8">
               {projects.map((project, index) => (
                 <ProjectCard
                   key={index}
                   imageSrc={project.imageSrc}
-                  title={project.title}
-                  category={project.category}
+                  
                   delay={100 + index * 100}
                 />
               ))}
+            </div>
             </div>
           </div>
         </section>
@@ -189,6 +231,17 @@ const Index: React.FC = () => {
       <Footer />
       
       {/* Scroll to top button - appears when scrolling down */}
+      <div className="flex gap-3" />
+      <a href='/contact'>
+      <button className="fixed bottom-7 right-20 bg-geoplan-red w-auto p-2 rounded flex items-center justify-center text-white shadow-lg transform transition-transform hover:-translate-y-2 focus:outline-none"
+      style={{ 
+        opacity: 0.8,
+        zIndex: 40
+      }}
+      > 
+      Demander un devis
+      </button>
+      </a>
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="fixed bottom-6 right-6 bg-geoplan-red w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg transform transition-transform hover:scale-110 focus:outline-none"
