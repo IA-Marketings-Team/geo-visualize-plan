@@ -366,8 +366,7 @@ const Carrieres: React.FC = () => {
             <div className="pt-4 border-t">
               <h4 className="text-lg font-semibold mb-4">Postuler à cette offre</h4>
               <p className="text-muted-foreground mb-4">
-                Envoyez-nous votre CV et une lettre de motivation en précisant l'intitulé du poste à l'adresse :
-                <a href="mailto:recrutement@geoplan.com" className="text-geoplan-red font-medium ml-1">recrutement@geoplan.com</a>
+                Envoyez-nous votre CV et une lettre de motivation en précisant l'intitulé du poste via notre adresse mail
               </p>
               <Button className="bg-geoplan-red hover:bg-geoplan-red/90 text-white">
                 Postuler maintenant
