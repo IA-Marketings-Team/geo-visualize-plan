@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {[
                 { name: 'Accueil', path: '/' },
-                { name: 'Notre Groupe', path: '/notre-groupe' },
+                { name: 'Notre Équipe', path: '/notre-equipe' },
                 { name: 'Services', path: '/services' },
                 { name: 'Carrières', path: '/carrieres' },
                 { name: 'RSE', path: '/rse' },
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} Geo-architectural. Tous droits réservés.
+            © {new Date().getFullYear()} i-numera. Tous droits réservés.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <Link to="/mentions-legales" className="text-white/60 hover:text-white transition-colors duration-200">

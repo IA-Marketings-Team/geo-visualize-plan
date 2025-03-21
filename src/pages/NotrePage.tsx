@@ -9,7 +9,7 @@ const NotrePage: React.FC = () => {
   return (
     <PageLayout>
       <PageHeader 
-        title="Notre Groupe" 
+        title="Notre Équipe" 
         subtitle="Un leader dans le traitement des données géographiques et des solutions cartographiques."
         backgroundImage="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
       />
@@ -29,13 +29,13 @@ const NotrePage: React.FC = () => {
               <h2 className="text-3xl font-display font-bold text-foreground mb-6">Notre Histoire</h2>
               <div className="w-20 h-1 bg-geoplan-red mb-6"></div>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-              Fondée en 2020 par une équipe d’ingénieurs passionnés et visionnaire, GeoPlan s'est rapidement imposée comme un acteur majeur dans le domaine des solutions cartographiques.
+              Fondée en 2020 par une équipe d’ingénieurs passionnés et visionnaire, Geo-architectural s'est rapidement imposée comme un acteur majeur dans le domaine des solutions cartographiques.
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Grâce à notre expertise technique et notre volonté constante d'innover, nous avons développé une gamme complète de services allant des plans 2D traditionnels aux rendus 3D photoréalistes, en passant par des solutions de cartographie numérique avancées.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Aujourd'hui, GeoPlan compte plus de 50 collaborateurs, et accompagne quotidiennement, et accompagne quotidiennement des clients de tous secteurs dans leurs projets d'aménagement et de visualisation spatiale.
+                Aujourd'hui, Geo-architectural compte plus de 50 collaborateurs, et accompagne quotidiennement, et accompagne quotidiennement des clients de tous secteurs dans leurs projets d'aménagement et de visualisation spatiale.
               </p>
             </AnimatedSection>
           </div>
@@ -112,7 +112,7 @@ const NotrePage: React.FC = () => {
                 <h3 className="text-xl font-semibold">Notre Performance</h3>
               </div>
               <p className="text-white/80 leading-relaxed mb-4">
-                GeoPlan a connu une croissance constante depuis sa création, avec une expansion significative de nos activités et de notre équipe au cours des dernières années.
+                Geo-architectural a connu une croissance constante depuis sa création, avec une expansion significative de nos activités et de notre équipe au cours des dernières années.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div className="text-center">

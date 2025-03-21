@@ -217,11 +217,11 @@ const Carrieres: React.FC = () => {
         <div className="container mx-auto px-4 md:px-6">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Travailler chez GeoPlan
+              Travailler chez Geo-architectural
             </h2>
             <div className="w-20 h-1 bg-geoplan-red mx-auto mb-6"></div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Rejoindre GeoPlan, c'est intégrer une équipe dynamique et passionnée, dans un environnement de travail stimulant et bienveillant.
+              Rejoindre Geo-architectural, c'est intégrer une équipe dynamique et passionnée, dans un environnement de travail stimulant et bienveillant.
             </p>
           </AnimatedSection>
 
