@@ -80,6 +80,9 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			right: {
+				20: "20"
+			},
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },

@@ -5,8 +5,8 @@ import AnimatedSection from './AnimatedSection';
 import { Building, MapPin, PenTool, Mountain, Lightbulb } from 'lucide-react';
 import { useServices } from '@/hooks/useDataApi';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LucideIcon } from 'lucide-react';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { LucideIcon, X } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle,DialogClose, DialogTrigger } from "@/components/ui/dialog";
 
 // Fonction pour mapper les noms d'icônes aux composants Lucide
 const getIconComponent = (iconName: string): LucideIcon => {
@@ -147,14 +147,20 @@ const Services: React.FC = () => {
 
       {selectedImage && (
         <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="sm:max-w-[90%]">
+          <DialogContent className="bg-white border-none sm:max-w-[50%] ">
             <img
               src={selectedImage}
               alt="Agrandie"
-              style={{width:"auto", height:'400px'}}
-              className=" m-auto h-auto object-contain"
+              style={{width:"auto", height:'400px', borderRadius:"20px"}}
+              className="rounded m-auto h-auto object-contain"
             />
           </DialogContent>
+          <DialogClose asChild>
+              <button className="absolute top-2 right-2 text-white hover:text-red-700">
+                <X />
+                <span className="sr-only">Close</span>
+              </button>
+            </DialogClose>
         </Dialog>
       )}
     </section>
