@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
               <p>123 Avenue de la Cartographie</p>
               <p>Antananarivo, Madagascar</p>
               <p className="mt-4">contact.mdgeo@gmail.com</p>
-              <p>+33 1 23 45 67 89</p>
+              <p>+33 9 85 40 45 64</p>
             </address>
           </div>
         </div>

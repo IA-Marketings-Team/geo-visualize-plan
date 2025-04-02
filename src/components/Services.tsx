@@ -113,7 +113,7 @@ const Services: React.FC = () => {
                       title={service.title}
                       description={service.description}
                       delay={100 + index * 100}
-                      style={{height:"200px"}} // Assurez-vous que la carte prend toute la hauteur disponible
+                      
                     />
                   </div>
                 </DialogTrigger>
