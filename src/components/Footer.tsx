@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
             <address className="not-italic text-white/70 text-sm space-y-2">
               <p>123 Avenue de la Cartographie</p>
               <p>Antananarivo, Madagascar</p>
-              <p className="mt-4">contact.mdgeo@gmail.com</p>
+              <p className="mt-4">contact@geoarchitectural.org</p>
               <p>+33 9 85 40 45 64</p>
             </address>
           </div>
